@@ -75,9 +75,14 @@ Drop the folder onto any static host:
 
 ```
 toolscord/
-├── index.html   # markup for every tool / channel
-├── styles.css   # the entire Discord-style theme
-└── app.js       # markdown parser, embed builder, webhook, decoders & more
+├── index.html            # markup + SEO / PWA meta for every tool
+├── styles.css            # the entire Discord-style theme
+├── app.js                # markdown parser, embed builder, webhook, decoders & more
+├── sw.js                 # service worker (offline app shell)
+├── manifest.webmanifest  # PWA manifest
+├── robots.txt            # crawler rules
+├── sitemap.xml           # sitemap for search engines
+└── icons/                # favicons, PWA icons, apple-touch & OG image
 ```
 
 ---
