@@ -9,7 +9,71 @@ by: github.com/pvrzz
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Toolscord — Discord Tools</title>
+  <title>Toolscord — Discord Markdown, Embed &amp; Webhook Tools</title>
+
+  <meta name="description" content="Toolscord is a free all-in-one Discord toolbox: a visual markdown editor, embed builder with webhook sender, timestamp generator, snowflake ID decoder, permissions calculator and color converter. No login, runs in your browser." />
+  <meta name="keywords" content="discord markdown editor, discord embed builder, discord webhook sender, discord timestamp generator, discord snowflake decoder, discord permissions calculator, discord color converter, discord tools, toolscord" />
+  <meta name="author" content="github.com/pvrzz" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://toolscord.pvrz.lol/" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Toolscord" />
+  <meta property="og:title" content="Toolscord — The all-in-one Discord toolbox" />
+  <meta property="og:description" content="Markdown editor, embed builder with webhook sender, timestamps, snowflake decoder, permissions calculator and more — all styled like Discord." />
+  <meta property="og:url" content="https://toolscord.pvrz.lol/" />
+  <meta property="og:image" content="https://toolscord.pvrz.lol/icons/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Toolscord — The all-in-one Discord toolbox" />
+  <meta name="twitter:description" content="Markdown editor, embed builder with webhook sender, timestamps, snowflake decoder, permissions calculator and more — all styled like Discord." />
+  <meta name="twitter:image" content="https://toolscord.pvrz.lol/icons/og-image.png" />
+
+  <meta name="theme-color" content="#5865f2" />
+  <meta name="application-name" content="Toolscord" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Toolscord" />
+
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16.png" />
+  <link rel="icon" href="icons/favicon.ico" sizes="any" />
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Toolscord",
+    "url": "https://toolscord.pvrz.lol/",
+    "description": "An all-in-one Discord toolbox: markdown editor, embed builder with webhook sender, timestamp generator, snowflake decoder, permissions calculator and color converter.",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Any",
+    "browserRequirements": "Requires JavaScript",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "author": { "@type": "Person", "name": "pvrzz", "url": "https://github.com/pvrzz" }
+  }
+  </script>
+
+  <script>
+    (function () {
+      var base = location.origin + location.pathname.replace(/index\.html$/, "");
+      if (base.charAt(base.length - 1) !== "/") base += "/";
+      var img = base + "icons/og-image.png";
+      var set = function (sel, attr, val) { var el = document.querySelector(sel); if (el) el.setAttribute(attr, val); };
+      set('link[rel="canonical"]', "href", base);
+      set('meta[property="og:url"]', "content", base);
+      set('meta[property="og:image"]', "content", img);
+      set('meta[name="twitter:image"]', "content", img);
+      var ld = document.querySelector('script[type="application/ld+json"]');
+      if (ld) { try { var d = JSON.parse(ld.textContent); d.url = base; ld.textContent = JSON.stringify(d); } catch (e) {} }
+    })();
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
