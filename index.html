@@ -1,0 +1,421 @@
+<!--
+===========================
+Toolscord
+by: github.com/pvrzz
+===========================
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Toolscord — Discord Tools</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="server-rail">
+        <div class="server-pill active" title="Toolscord">
+          <span class="server-glyph">TC</span>
+        </div>
+        <div class="server-sep"></div>
+        <a class="server-pill ghost" href="https://github.com/pvrzz" target="_blank" rel="noopener" title="github.com/pvrzz">
+          <span class="server-glyph">pz</span>
+        </a>
+      </div>
+      <div class="channels">
+        <div class="channels-header">
+          <span>Toolscord</span>
+          <i class="fa-solid fa-chevron-down"></i>
+        </div>
+        <div class="channels-scroll">
+        <div class="channel-group">
+          <div class="channel-group-label">Create</div>
+          <button class="channel active" data-tab="editor">
+            <span class="hash">#</span><span>editor</span>
+          </button>
+          <button class="channel" data-tab="embed">
+            <span class="hash">#</span><span>embed</span>
+          </button>
+          <button class="channel" data-tab="timestamps">
+            <span class="hash">#</span><span>timestamps</span>
+          </button>
+        </div>
+        <div class="channel-group">
+          <div class="channel-group-label">Developer</div>
+          <button class="channel" data-tab="snowflake">
+            <span class="hash">#</span><span>snowflake</span>
+          </button>
+          <button class="channel" data-tab="permissions">
+            <span class="hash">#</span><span>permissions</span>
+          </button>
+          <button class="channel" data-tab="colors">
+            <span class="hash">#</span><span>colors</span>
+          </button>
+        </div>
+        <div class="channel-group">
+          <div class="channel-group-label">Reference</div>
+          <button class="channel" data-tab="cheatsheet">
+            <span class="hash">#</span><span>cheatsheet</span>
+          </button>
+        </div>
+        <div class="channel-group" id="formattingGroup">
+          <div class="channel-group-label">Formatting</div>
+          <div class="quick-list" id="quickList"></div>
+        </div>
+        </div>
+        <div class="user-bar">
+          <div class="user-avatar">pz</div>
+          <div class="user-meta">
+            <span class="user-name">you</span>
+            <span class="user-status">using toolscord</span>
+          </div>
+          <a class="user-gh" href="https://github.com/pvrzz" target="_blank" rel="noopener" title="github.com/pvrzz">
+            <i class="fa-brands fa-github"></i>
+          </a>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="topbar-title">
+          <span class="hash big">#</span>
+          <span id="topbarName">editor</span>
+        </div>
+        <div class="topbar-divider"></div>
+        <div class="topbar-desc" id="topbarDesc">Format your message visually — no symbols to memorize.</div>
+        <div class="topbar-spacer"></div>
+        <button class="ghost-btn" id="copyBtn">
+          <i class="fa-solid fa-copy"></i>
+          <span>Copy</span>
+        </button>
+        <button class="ghost-btn" id="clearBtn">
+          <i class="fa-solid fa-trash-can"></i>
+          <span>Clear</span>
+        </button>
+      </header>
+
+      <!-- EDITOR TAB -->
+      <section class="tab-panel active" data-panel="editor">
+        <div class="chat-scroll">
+          <div class="channel-welcome">
+            <div class="cw-icon">#</div>
+            <h2>Welcome to #editor</h2>
+            <p>This is the start of the <strong>#editor</strong> channel. Type in the box below and watch your message render live — exactly how Discord will show it.</p>
+          </div>
+          <div class="dp-message live">
+            <div class="dp-avatar">pz</div>
+            <div class="dp-body">
+              <div class="dp-head">
+                <span class="dp-name">you</span>
+                <span class="dp-badge">APP</span>
+                <span class="dp-time">Today at 5:13 PM</span>
+              </div>
+              <div class="dp-content" id="preview"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="composer-wrap">
+          <div class="composer">
+            <div class="composer-toolbar" id="toolbar"></div>
+            <div class="composer-main">
+              <button class="composer-add" title="Insert formatting">
+                <i class="fa-solid fa-plus"></i>
+              </button>
+              <textarea id="editor" rows="1" spellcheck="false" placeholder="Message #editor"></textarea>
+              <div class="composer-actions">
+                <button class="composer-action" id="copyComposer" title="Copy message">
+                  <i class="fa-solid fa-copy"></i>
+                </button>
+                <button class="composer-action" id="emojiBtn" title="Emoji">
+                  <i class="fa-regular fa-face-smile"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="composer-hint">Renders live above &nbsp;•&nbsp; <strong>Ctrl</strong>+<strong>B</strong>/<strong>I</strong>/<strong>U</strong> to format &nbsp;•&nbsp; select text, then click a button</div>
+        </div>
+
+        <div class="emoji-popup" id="emojiPopup" hidden>
+          <div class="emoji-search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input id="emojiSearch" placeholder="Search emoji" spellcheck="false" />
+          </div>
+          <div class="emoji-grid" id="emojiGrid"></div>
+        </div>
+      </section>
+
+      <!-- EMBED TAB -->
+      <section class="tab-panel" data-panel="embed">
+        <div class="embed-layout">
+          <div class="embed-form" id="embedForm">
+            <h2>Embed Builder</h2>
+            <p class="panel-sub">Design a rich embed visually, then copy the JSON for a webhook or bot. Markdown works in the description and field values.</p>
+
+            <div class="ef-section">
+              <div class="ef-section-title">Author</div>
+              <div class="ef-row">
+                <div class="ef-field"><label>Name</label><input data-embed="author.name" placeholder="Author name" /></div>
+              </div>
+              <div class="ef-row">
+                <div class="ef-field"><label>Author URL</label><input data-embed="author.url" placeholder="https://" /></div>
+                <div class="ef-field"><label>Icon URL</label><input data-embed="author.icon_url" placeholder="https://" /></div>
+              </div>
+            </div>
+
+            <div class="ef-section">
+              <div class="ef-section-title">Body</div>
+              <div class="ef-row">
+                <div class="ef-field grow"><label>Title</label><input data-embed="title" placeholder="Embed title" /></div>
+                <div class="ef-field"><label>Title URL</label><input data-embed="url" placeholder="https://" /></div>
+              </div>
+              <div class="ef-field"><label>Description</label><textarea data-embed="description" rows="4" placeholder="Supports **markdown**, links, lists…"></textarea></div>
+              <div class="ef-row">
+                <div class="ef-field"><label>Color</label>
+                  <div class="ef-color">
+                    <input type="color" id="embedColor" value="#5865f2" />
+                    <input type="text" id="embedColorHex" value="#5865F2" maxlength="7" />
+                  </div>
+                </div>
+                <div class="ef-field"><label>Decimal (for JSON)</label><input id="embedColorDec" readonly /></div>
+              </div>
+            </div>
+
+            <div class="ef-section">
+              <div class="ef-section-title">Media</div>
+              <div class="ef-row">
+                <div class="ef-field"><label>Image URL</label><input data-embed="image.url" placeholder="https://big-image" /></div>
+                <div class="ef-field"><label>Thumbnail URL</label><input data-embed="thumbnail.url" placeholder="https://small-thumb" /></div>
+              </div>
+            </div>
+
+            <div class="ef-section">
+              <div class="ef-section-title">
+                Fields
+                <button class="mini-btn small" id="addField">+ Add field</button>
+              </div>
+              <div id="fieldsList" class="fields-list"></div>
+            </div>
+
+            <div class="ef-section">
+              <div class="ef-section-title">Footer</div>
+              <div class="ef-row">
+                <div class="ef-field grow"><label>Footer text</label><input data-embed="footer.text" placeholder="Footer text" /></div>
+                <div class="ef-field"><label>Footer icon URL</label><input data-embed="footer.icon_url" placeholder="https://" /></div>
+              </div>
+              <label class="ef-check"><input type="checkbox" id="embedTimestamp" /> Include current timestamp</label>
+            </div>
+          </div>
+
+          <div class="embed-side">
+            <div class="embed-preview-wrap">
+              <div class="pane-label"><span>Preview</span><span class="pane-hint">live Discord embed</span></div>
+              <div class="discord-preview">
+                <div class="dp-message">
+                  <div class="dp-avatar">pz</div>
+                  <div class="dp-body">
+                    <div class="dp-head">
+                      <span class="dp-name">you</span><span class="dp-badge">APP</span>
+                      <span class="dp-time">Today at 5:13 PM</span>
+                    </div>
+                    <div id="embedPreview"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="embed-json-wrap">
+              <div class="pane-label">
+                <span>JSON</span>
+                <span class="pane-hint">webhook / bot ready</span>
+                <span class="pane-spacer"></span>
+                <button class="mini-btn small" id="importJson">Import</button>
+                <button class="mini-btn small" id="copyJson">Copy</button>
+              </div>
+              <textarea id="embedJson" class="json-box" spellcheck="false"></textarea>
+            </div>
+
+            <div class="webhook-box">
+              <div class="pane-label">
+                <span><i class="fa-solid fa-plug"></i> Webhook</span>
+                <span class="pane-hint">load an existing message or send a new one</span>
+              </div>
+              <div class="wh-hint" id="whHint" hidden>
+                <i class="fa-solid fa-arrow-up"></i> Fill in both your <strong>Webhook URL</strong> and a <strong>Message link</strong> first.
+              </div>
+              <div class="ef-field">
+                <label>Webhook URL</label>
+                <input id="whUrl" type="password" placeholder="https://discord.com/api/webhooks/…" autocomplete="off" spellcheck="false" />
+              </div>
+              <div class="ef-field">
+                <label>Message link <span class="opt">(to load an embed you sent)</span></label>
+                <div class="wh-load-row">
+                  <input id="whMsgLink" placeholder="https://discord.com/channels/…" autocomplete="off" spellcheck="false" />
+                  <button class="mini-btn ghost-mini" id="whLoad"><i class="fa-solid fa-download"></i> Load</button>
+                </div>
+                <span class="webhook-status" id="whLoadStatus"></span>
+              </div>
+              <div class="wh-divider"></div>
+              <div class="ef-row">
+                <div class="ef-field"><label>Username override <span class="opt">(optional)</span></label><input id="whName" placeholder="Toolscord" autocomplete="off" /></div>
+                <div class="ef-field"><label>Avatar URL <span class="opt">(optional)</span></label><input id="whAvatar" placeholder="https://" autocomplete="off" /></div>
+              </div>
+              <div class="ef-field">
+                <label>Message content <span class="opt">(optional, sent above embed)</span></label>
+                <textarea id="whContent" rows="2" placeholder="Hello @everyone…"></textarea>
+              </div>
+              <div class="webhook-foot">
+                <button class="mini-btn" id="whSend"><i class="fa-solid fa-paper-plane"></i> Send to Discord</button>
+                <span class="webhook-status" id="whStatus"></span>
+              </div>
+              <p class="webhook-note"><i class="fa-solid fa-lock"></i> Your webhook URL stays in this browser only — it is never saved, logged, or sent anywhere except Discord.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TIMESTAMPS TAB -->
+      <section class="tab-panel" data-panel="timestamps">
+        <div class="ts-wrap">
+          <div class="ts-controls">
+            <h2>Timestamp Builder</h2>
+            <p class="ts-sub">Discord renders timestamps in each viewer's own timezone. Pick a date &amp; time, choose a style, and copy the code.</p>
+            <div class="ts-field">
+              <label>Date</label>
+              <input type="date" id="tsDate" />
+            </div>
+            <div class="ts-field">
+              <label>Time</label>
+              <input type="time" id="tsTime" step="1" />
+            </div>
+            <div class="ts-field">
+              <button class="mini-btn" id="tsNow">Set to now</button>
+            </div>
+            <div class="ts-field">
+              <label>Style</label>
+              <div class="ts-styles" id="tsStyles"></div>
+            </div>
+          </div>
+          <div class="ts-output">
+            <div class="ts-out-row">
+              <div class="ts-out-label">Code</div>
+              <div class="ts-out-code">
+                <code id="tsCode">&lt;t:0:F&gt;</code>
+                <button class="mini-btn" id="tsCopy">Copy</button>
+              </div>
+            </div>
+            <div class="ts-out-row">
+              <div class="ts-out-label">Preview</div>
+              <div class="discord-preview compact">
+                <div class="dp-message">
+                  <div class="dp-avatar">pz</div>
+                  <div class="dp-body">
+                    <div class="dp-head">
+                      <span class="dp-name">you</span>
+                      <span class="dp-time">Today at 5:13 PM</span>
+                    </div>
+                    <div class="dp-content"><span class="md-timestamp" id="tsPreview">—</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="ts-out-row">
+              <div class="ts-out-label">Unix</div>
+              <div class="ts-out-code"><code id="tsUnix">0</code></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SNOWFLAKE TAB -->
+      <section class="tab-panel" data-panel="snowflake">
+        <div class="tool-wrap narrow">
+          <h2>Snowflake Decoder</h2>
+          <p class="panel-sub">Every Discord ID (user, message, channel, server…) is a snowflake that encodes its creation time. Paste one to decode it.</p>
+          <div class="ef-field">
+            <label>Discord ID / Snowflake</label>
+            <input id="sfInput" placeholder="e.g. 175928847299117063" />
+          </div>
+          <div class="sf-result" id="sfResult">
+            <div class="sf-row"><span class="sf-key">Created</span><span class="sf-val" id="sfDate">—</span></div>
+            <div class="sf-row"><span class="sf-key">Relative</span><span class="sf-val" id="sfRel">—</span></div>
+            <div class="sf-row"><span class="sf-key">Unix (ms)</span><span class="sf-val" id="sfUnixMs">—</span></div>
+            <div class="sf-row"><span class="sf-key">Timestamp tag</span><span class="sf-val mono" id="sfTag">—</span></div>
+            <div class="sf-row"><span class="sf-key">Worker ID</span><span class="sf-val" id="sfWorker">—</span></div>
+            <div class="sf-row"><span class="sf-key">Process ID</span><span class="sf-val" id="sfProcess">—</span></div>
+            <div class="sf-row"><span class="sf-key">Increment</span><span class="sf-val" id="sfIncrement">—</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PERMISSIONS TAB -->
+      <section class="tab-panel" data-panel="permissions">
+        <div class="perm-layout">
+          <div class="perm-list-wrap">
+            <h2>Permissions Calculator</h2>
+            <p class="panel-sub">Pick permissions to get the bitfield integer and a ready-to-use bot invite link.</p>
+            <div class="perm-grid" id="permGrid"></div>
+          </div>
+          <div class="perm-side">
+            <div class="ef-field">
+              <label>Permissions integer</label>
+              <div class="ts-out-code"><code id="permValue">0</code><button class="mini-btn small" id="permCopy">Copy</button></div>
+            </div>
+            <div class="ef-field">
+              <label>Application (client) ID</label>
+              <input id="permClientId" placeholder="your bot's application id" />
+            </div>
+            <div class="ef-field">
+              <label>Bot invite link</label>
+              <textarea id="permInvite" class="json-box short" readonly></textarea>
+              <button class="mini-btn small" id="permInviteCopy" style="margin-top:8px">Copy invite link</button>
+            </div>
+            <button class="mini-btn ghost-mini" id="permClear">Clear all</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- COLORS TAB -->
+      <section class="tab-panel" data-panel="colors">
+        <div class="tool-wrap">
+          <h2>Color Converter</h2>
+          <p class="panel-sub">Discord embeds and role colors use a decimal integer. Convert between hex, RGB and decimal, or grab a preset.</p>
+          <div class="color-main">
+            <div class="color-pick">
+              <input type="color" id="colInput" value="#5865f2" />
+              <div class="color-swatch" id="colSwatch"></div>
+            </div>
+            <div class="color-fields">
+              <div class="ef-row">
+                <div class="ef-field"><label>Hex</label><input id="colHex" value="#5865F2" maxlength="7" /></div>
+                <div class="ef-field"><label>Decimal</label><input id="colDec" value="5793266" /></div>
+              </div>
+              <div class="ef-row">
+                <div class="ef-field"><label>R</label><input id="colR" type="number" min="0" max="255" value="88" /></div>
+                <div class="ef-field"><label>G</label><input id="colG" type="number" min="0" max="255" value="101" /></div>
+                <div class="ef-field"><label>B</label><input id="colB" type="number" min="0" max="255" value="242" /></div>
+              </div>
+            </div>
+          </div>
+          <div class="ef-section-title" style="margin-top:8px">Presets</div>
+          <div class="color-presets" id="colPresets"></div>
+        </div>
+      </section>
+
+      <!-- CHEATSHEET TAB -->
+      <section class="tab-panel" data-panel="cheatsheet">
+        <div class="cheat-wrap" id="cheatWrap"></div>
+      </section>
+    </main>
+  </div>
+
+  <div class="toast" id="toast">Copied to clipboard</div>
+  <script src="app.js"></script>
+</body>
+</html>
