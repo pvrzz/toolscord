@@ -17,7 +17,8 @@ Format messages, build rich embeds, fire webhooks, decode IDs, calculate permiss
 ## ✨ Why Toolscord?
 
 Most Discord tools are scattered across multiple, complicated websites. Toolscord puts them all in one website, and it's wrapped in a UI that looks and feels just like Discord.
-Better yet, Toolscord can be used with **No accounts, no tracking, and no backend.** Everything runs inside of your browser.
+Better yet, Toolscord can be used with **No accounts, no tracking, and no backend.** Everything runs inside of your browser. 
+Additionally, you can install it as a PWA app and access it easily from your mobile device's home screen!
 
 ---
 
