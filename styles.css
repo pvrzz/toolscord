@@ -456,7 +456,7 @@ body {
 .ts-style .ts-style-code { font-family: 'Consolas', monospace; font-size: 12px; color: var(--text-faint); }
 
 .ts-output { display: flex; flex-direction: column; gap: 20px; }
-.ts-out-row {}
+.ts-out-row { display: flex; align-items: center; gap: 12px; }
 .ts-out-label {
   font-size: 12px; font-weight: 700; text-transform: uppercase;
   letter-spacing: .02em; color: var(--text-muted); margin-bottom: 8px;
