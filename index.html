@@ -145,9 +145,13 @@ by: github.com/pvrzz
         </div>
       </div>
     </aside>
+    <div class="nav-backdrop" id="navBackdrop"></div>
 
     <main class="main">
       <header class="topbar">
+        <button class="nav-toggle" id="navToggle" aria-label="Open menu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
         <div class="topbar-title">
           <span class="hash big">#</span>
           <span id="topbarName">editor</span>
@@ -165,7 +169,6 @@ by: github.com/pvrzz
         </button>
       </header>
 
-      <!-- EDITOR TAB -->
       <section class="tab-panel active" data-panel="editor">
         <div class="chat-scroll">
           <div class="channel-welcome">
@@ -188,7 +191,11 @@ by: github.com/pvrzz
 
         <div class="composer-wrap">
           <div class="composer">
-            <div class="composer-toolbar" id="toolbar"></div>
+            <div class="toolbar-bar">
+              <button class="tb-arrow tb-left" id="tbLeft" aria-label="Scroll left"><i class="fa-solid fa-chevron-left"></i></button>
+              <div class="composer-toolbar" id="toolbar"></div>
+              <button class="tb-arrow tb-right" id="tbRight" aria-label="Scroll right"><i class="fa-solid fa-chevron-right"></i></button>
+            </div>
             <div class="composer-main">
               <button class="composer-add" title="Insert formatting">
                 <i class="fa-solid fa-plus"></i>
@@ -216,7 +223,6 @@ by: github.com/pvrzz
         </div>
       </section>
 
-      <!-- EMBED TAB -->
       <section class="tab-panel" data-panel="embed">
         <div class="embed-layout">
           <div class="embed-form" id="embedForm">
@@ -344,7 +350,6 @@ by: github.com/pvrzz
         </div>
       </section>
 
-      <!-- TIMESTAMPS TAB -->
       <section class="tab-panel" data-panel="timestamps">
         <div class="ts-wrap">
           <div class="ts-controls">
@@ -397,7 +402,6 @@ by: github.com/pvrzz
         </div>
       </section>
 
-      <!-- SNOWFLAKE TAB -->
       <section class="tab-panel" data-panel="snowflake">
         <div class="tool-wrap narrow">
           <h2>Snowflake Decoder</h2>
@@ -418,7 +422,6 @@ by: github.com/pvrzz
         </div>
       </section>
 
-      <!-- PERMISSIONS TAB -->
       <section class="tab-panel" data-panel="permissions">
         <div class="perm-layout">
           <div class="perm-list-wrap">
@@ -445,7 +448,6 @@ by: github.com/pvrzz
         </div>
       </section>
 
-      <!-- COLORS TAB -->
       <section class="tab-panel" data-panel="colors">
         <div class="tool-wrap">
           <h2>Color Converter</h2>
@@ -472,7 +474,6 @@ by: github.com/pvrzz
         </div>
       </section>
 
-      <!-- CHEATSHEET TAB -->
       <section class="tab-panel" data-panel="cheatsheet">
         <div class="cheat-wrap" id="cheatWrap"></div>
       </section>
