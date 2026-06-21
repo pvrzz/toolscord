@@ -43,12 +43,12 @@ body {
   color: var(--text-normal);
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
   overflow: hidden;
 }
 
-.app { display: flex; height: 100vh; }
+.app { display: flex; height: 100vh; height: 100dvh; }
 
-/* ============ SIDEBAR ============ */
 .sidebar { display: flex; flex-shrink: 0; }
 
 .server-rail {
@@ -177,7 +177,6 @@ body {
 }
 .user-gh:hover { background: var(--bg-hover); color: var(--text-normal); }
 
-/* ============ MAIN ============ */
 .main {
   flex: 1;
   background: var(--bg-main);
@@ -217,7 +216,6 @@ body {
 .tab-panel { display: none; flex: 1; flex-direction: column; min-height: 0; }
 .tab-panel.active { display: flex; }
 
-/* ============ CHAT AREA ============ */
 .chat-scroll {
   flex: 1;
   overflow-y: auto;
@@ -246,21 +244,40 @@ body {
 }
 .dp-message.live:hover { background: rgba(2,2,2,0.06); }
 
-/* ============ COMPOSER ============ */
 .composer-wrap { flex-shrink: 0; padding: 0 16px 8px; }
 .composer {
   background: var(--bg-input);
   border-radius: 10px;
   box-shadow: 0 1px 2px rgba(0,0,0,0.15);
 }
+.toolbar-bar {
+  display: flex;
+  align-items: stretch;
+  border-bottom: 1px solid rgba(0,0,0,0.18);
+}
 .composer-toolbar {
+  flex: 1;
+  min-width: 0;
   display: flex;
   flex-wrap: wrap;
   gap: 2px;
   align-items: center;
   padding: 8px 12px;
-  border-bottom: 1px solid rgba(0,0,0,0.18);
 }
+.tb-arrow {
+  display: none;
+  flex: 0 0 auto;
+  width: 32px;
+  background: transparent;
+  border: none;
+  color: var(--interactive-normal);
+  cursor: pointer;
+  font-size: 13px;
+  align-items: center;
+  justify-content: center;
+}
+.tb-arrow:active { background: rgba(255,255,255,0.08); }
+.tb-arrow.disabled { opacity: .25; pointer-events: none; }
 .tool-btn {
   min-width: 32px; height: 30px;
   padding: 0 8px;
@@ -321,7 +338,6 @@ body {
 }
 .composer-hint strong { color: var(--text-muted); font-weight: 600; }
 
-/* ============ DISCORD PREVIEW (shared) ============ */
 .discord-preview {
   background: var(--bg-input-2);
   border: 1px solid rgba(0,0,0,0.3);
@@ -358,7 +374,6 @@ body {
   color: var(--text-faint);
 }
 
-/* ============ RENDERED MARKDOWN ============ */
 .dp-content strong { font-weight: 700; }
 .dp-content em { font-style: italic; }
 .dp-content u { text-decoration: underline; }
@@ -414,7 +429,6 @@ body {
   border-radius: 3px; padding: 0 2px;
 }
 
-/* ============ TIMESTAMP TAB ============ */
 .ts-wrap {
   flex: 1; overflow-y: auto; padding: 24px;
   display: grid; grid-template-columns: minmax(300px, 1fr) minmax(300px, 1fr);
@@ -469,7 +483,6 @@ body {
 .ts-out-code code { font-family: 'Consolas', monospace; font-size: 15px; color: #f2c14e; flex: 1; }
 .ts-out-code .mini-btn { padding: 6px 12px; }
 
-/* ============ CHEATSHEET TAB ============ */
 .cheat-wrap {
   flex: 1; overflow-y: auto; padding: 24px;
   display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -492,7 +505,6 @@ body {
 }
 .cheat-result { font-size: 14px; text-align: right; }
 
-/* ============ TOAST ============ */
 .toast {
   position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(80px);
   background: var(--green); color: #fff; font-weight: 600; font-size: 14px;
@@ -501,13 +513,11 @@ body {
 }
 .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
 
-/* scrollbars */
 ::-webkit-scrollbar { width: 8px; height: 8px; }
 ::-webkit-scrollbar-thumb { background: var(--bg-input-2); border-radius: 4px; }
 .channels::-webkit-scrollbar-thumb { background: #202225; }
 ::-webkit-scrollbar-track { background: transparent; }
 
-/* ============ SHARED TOOL UI ============ */
 .panel-sub { color: var(--text-muted); font-size: 14px; line-height: 1.45; margin-bottom: 20px; max-width: 720px; }
 .tab-panel h2 { color: var(--header-primary); font-size: 20px; margin-bottom: 6px; }
 .pane-label {
@@ -540,7 +550,6 @@ body {
 .ef-check { display: flex; align-items: center; gap: 8px; color: var(--text-normal); font-size: 14px; margin-top: 12px; cursor: pointer; }
 .ef-check input { width: 16px; height: 16px; accent-color: var(--blurple); }
 
-/* ============ EMBED TAB ============ */
 .embed-layout {
   flex: 1; display: grid; grid-template-columns: minmax(360px, 1fr) minmax(360px, 1fr);
   gap: 20px; padding: 20px; overflow: hidden; min-height: 0;
@@ -582,7 +591,6 @@ body {
 }
 .json-box.short { min-height: 64px; height: 64px; }
 
-/* embed render */
 .embed {
   max-width: 432px; background: var(--bg-sidebar);
   border-radius: 4px; border-left: 4px solid var(--blurple);
@@ -612,7 +620,6 @@ body {
 .embed-footer .dot { color: var(--text-faint); }
 .embed-empty { color: var(--text-faint); font-size: 14px; font-style: italic; }
 
-/* shared markdown styling inside embeds */
 .embed-desc strong, .efield-value strong { font-weight: 700; }
 .embed-desc em, .efield-value em { font-style: italic; }
 .embed-desc a, .efield-value a { color: var(--text-link); text-decoration: none; }
@@ -621,7 +628,6 @@ body {
   background: var(--code-bg); border: 1px solid var(--code-border); border-radius: 4px; padding: 0 3px;
 }
 
-/* ============ SNOWFLAKE TAB ============ */
 .sf-result {
   margin-top: 20px; background: var(--bg-input-2);
   border: 1px solid rgba(0,0,0,0.25); border-radius: 8px; overflow: hidden;
@@ -632,7 +638,6 @@ body {
 .sf-val { font-size: 15px; color: var(--header-primary); text-align: right; word-break: break-all; }
 .sf-val.mono { font-family: 'Consolas', monospace; color: #f2c14e; font-size: 14px; }
 
-/* ============ PERMISSIONS TAB ============ */
 .perm-layout {
   flex: 1; display: grid; grid-template-columns: 1fr minmax(300px, 360px);
   gap: 20px; padding: 24px; overflow: hidden; min-height: 0;
@@ -652,7 +657,6 @@ body {
 .perm-side { display: flex; flex-direction: column; gap: 16px; overflow-y: auto; }
 .perm-side .ef-field { flex: none; }
 
-/* ============ COLORS TAB ============ */
 .color-main { display: flex; gap: 20px; align-items: flex-start; margin-bottom: 16px; flex-wrap: wrap; }
 .color-pick { display: flex; flex-direction: column; gap: 10px; }
 .color-pick input[type="color"] {
@@ -670,7 +674,6 @@ body {
 .color-preset:hover { background: var(--bg-input); }
 .color-preset .pswatch { width: 18px; height: 18px; border-radius: 4px; flex-shrink: 0; }
 
-/* ============ FONT AWESOME ICONS ============ */
 .tool-btn i { font-size: 14px; }
 .tool-btn .ico { font-size: 15px; }
 .ghost-btn i { font-size: 14px; }
@@ -680,7 +683,6 @@ body {
 .composer-action i { font-size: 19px; }
 .mini-btn:disabled { opacity: .55; cursor: default; }
 
-/* ============ EMOJI PICKER ============ */
 .tab-panel[data-panel="editor"] { position: relative; }
 .emoji-popup {
   position: absolute; bottom: 86px; right: 24px; width: 332px; max-height: 326px;
@@ -703,7 +705,6 @@ body {
 .emoji-cell:hover { background: var(--bg-hover); }
 .emoji-none { grid-column: 1 / -1; text-align: center; color: var(--text-muted); padding: 24px; font-size: 14px; }
 
-/* ============ WEBHOOK SENDER ============ */
 .embed-side { overflow-y: auto; padding-right: 4px; }
 .embed-preview-wrap, .embed-json-wrap { flex: none; }
 .embed-preview-wrap .discord-preview { flex: none; }
@@ -743,10 +744,79 @@ body {
 .wh-divider { height: 1px; background: rgba(255,255,255,0.07); margin: 16px 0; }
 #whLoadStatus { display: inline-block; margin-top: 8px; }
 
+.nav-toggle {
+  display: none;
+  background: none; border: none; color: var(--interactive-normal);
+  font-size: 18px; padding: 8px 10px; border-radius: 4px; cursor: pointer;
+  margin-left: -4px;
+}
+.nav-toggle:hover { background: var(--bg-hover); color: var(--text-normal); }
+.nav-backdrop { display: none; }
+
 @media (max-width: 1000px) {
   .embed-layout, .perm-layout { grid-template-columns: 1fr; overflow-y: auto; }
   .ts-wrap { grid-template-columns: 1fr; }
 }
-@media (max-width: 720px) {
-  .channels { display: none; }
+
+@media (max-width: 820px) {
+  .nav-toggle { display: flex; align-items: center; justify-content: center; }
+
+  .sidebar {
+    position: fixed; top: 0; left: 0; height: 100%; height: 100dvh;
+    z-index: 300; transform: translateX(-100%);
+    transition: transform .24s ease; box-shadow: var(--shadow);
+  }
+  .sidebar.open { transform: translateX(0); }
+
+  .nav-backdrop {
+    display: block; position: fixed; inset: 0; z-index: 250;
+    background: rgba(0, 0, 0, 0.55); opacity: 0; pointer-events: none;
+    transition: opacity .2s ease;
+  }
+  .nav-backdrop.show { opacity: 1; pointer-events: auto; }
+
+  .main { width: 100%; }
+
+  .topbar { padding: 0 8px; gap: 4px; }
+  .topbar-divider, .topbar-desc { display: none; }
+  .ghost-btn span { display: none; }
+  .ghost-btn { padding: 8px; }
+
+  .chat-scroll { padding: 12px 12px 6px; }
+  .composer-wrap { padding: 0 12px 8px; }
+  .composer-hint { display: none; }
+
+  .tb-arrow { display: flex; }
+  .composer-toolbar {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding: 6px 8px;
+  }
+  .composer-toolbar::-webkit-scrollbar { display: none; }
+  .tool-btn { flex: 0 0 auto; }
+
+  .channel-welcome h2 { font-size: 22px; }
+  .channel-welcome p { font-size: 14px; }
+  .cw-icon { width: 56px; height: 56px; font-size: 32px; margin-bottom: 6px; }
+
+  .embed-layout { padding: 14px; gap: 14px; }
+  .embed { max-width: 100%; }
+  .tool-wrap, .perm-layout, .ts-wrap { padding: 16px; }
+  .ef-row { flex-direction: column; gap: 12px; }
+  .color-main { flex-direction: column; }
+
+  .emoji-popup { left: 12px; right: 12px; width: auto; bottom: 92px; }
+
+  .channel, .quick-item { padding: 9px 8px; }
+
+  input, textarea { font-size: 16px; }
+}
+
+@media (max-width: 420px) {
+  .server-rail { width: 60px; }
+  .channels { width: calc(100vw - 100px); max-width: 260px; }
+  .perm-grid { grid-template-columns: 1fr; }
 }
