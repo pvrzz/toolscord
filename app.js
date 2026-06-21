@@ -154,8 +154,6 @@ function setSel(a, b) {
   editor.selectionEnd = b;
 }
 
-/* ============ MARKDOWN RENDERER ============ */
-
 function escapeHtml(s) {
   return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
@@ -420,8 +418,6 @@ function attachSpoilers() {
   });
 }
 
-/* ============ TABS ============ */
-
 function setupTabs() {
   const channels = document.querySelectorAll(".channel[data-tab]");
   const panels = document.querySelectorAll(".tab-panel");
@@ -448,11 +444,40 @@ function setupTabs() {
       const showEditorBtns = tab === "editor" ? "" : "none";
       document.getElementById("copyBtn").style.display = showEditorBtns;
       document.getElementById("clearBtn").style.display = showEditorBtns;
+      closeNav();
     });
   });
 }
 
-/* ============ TIMESTAMPS TAB ============ */
+function openNav() {
+  document.querySelector(".sidebar").classList.add("open");
+  document.getElementById("navBackdrop").classList.add("show");
+}
+function closeNav() {
+  document.querySelector(".sidebar").classList.remove("open");
+  document.getElementById("navBackdrop").classList.remove("show");
+}
+function setupNav() {
+  document.getElementById("navToggle").addEventListener("click", openNav);
+  document.getElementById("navBackdrop").addEventListener("click", closeNav);
+  document.addEventListener("keydown", e => { if (e.key === "Escape") closeNav(); });
+}
+
+function setupToolbarScroll() {
+  const bar = document.getElementById("toolbar");
+  const left = document.getElementById("tbLeft");
+  const right = document.getElementById("tbRight");
+  const update = () => {
+    const max = bar.scrollWidth - bar.clientWidth - 1;
+    left.classList.toggle("disabled", bar.scrollLeft <= 0);
+    right.classList.toggle("disabled", bar.scrollLeft >= max);
+  };
+  left.addEventListener("click", () => bar.scrollBy({ left: -160, behavior: "smooth" }));
+  right.addEventListener("click", () => bar.scrollBy({ left: 160, behavior: "smooth" }));
+  bar.addEventListener("scroll", update);
+  window.addEventListener("resize", update);
+  update();
+}
 
 const TS_STYLES = [
   { code: "t", name: "Short Time" },
@@ -521,8 +546,6 @@ function setupTimestamps() {
   update();
 }
 
-/* ============ CHEATSHEET TAB ============ */
-
 const CHEAT = [
   { title: "Text Styles", rows: [
     ["**bold**", "<strong>bold</strong>"],
@@ -575,8 +598,6 @@ function buildCheatsheet() {
   });
 }
 
-/* ============ UTILS ============ */
-
 function copyText(text) {
   navigator.clipboard.writeText(text).then(() => showToast("Copied to clipboard")).catch(() => {
     const ta = document.createElement("textarea");
@@ -603,8 +624,6 @@ function loadState() {
     if (v !== null) editor.value = v;
   } catch (e) {}
 }
-
-/* ============ INIT ============ */
 
 editor.addEventListener("input", render);
 editor.addEventListener("keydown", e => {
@@ -635,8 +654,6 @@ Format Discord messages **without memorizing symbols**.
 
 > "No more guessing which symbol does what."
 -# Made with Toolscord`;
-
-/* ============ EMBED BUILDER ============ */
 
 function embedGet(sel) {
   const el = document.querySelector(`[data-embed="${sel}"]`);
@@ -821,8 +838,6 @@ function setupEmbed() {
   });
 }
 
-/* ============ SNOWFLAKE DECODER ============ */
-
 const DISCORD_EPOCH = 1420070400000n;
 
 function decodeSnowflake() {
@@ -849,8 +864,6 @@ function setupSnowflake() {
   input.value = "175928847299117063";
   decodeSnowflake();
 }
-
-/* ============ PERMISSIONS CALCULATOR ============ */
 
 const PERMISSIONS = [
   ["Create Invite", 0], ["Kick Members", 1], ["Ban Members", 2], ["Administrator", 3],
@@ -895,8 +908,6 @@ function setupPermissions() {
   });
   updatePerms();
 }
-
-/* ============ COLOR CONVERTER ============ */
 
 const COLOR_PRESETS = [
   ["Blurple", "#5865F2"], ["Green", "#57F287"], ["Yellow", "#FEE75C"], ["Fuchsia", "#EB459E"],
@@ -949,8 +960,6 @@ function setupColors() {
   ["colR", "colG", "colB"].forEach(id => document.getElementById(id).addEventListener("input", () => applyColor(null, "rgb")));
   applyColor("#5865F2", "hex");
 }
-
-/* ============ EMOJI PICKER ============ */
 
 const EMOJIS = [
   ["😀", "grinning smile happy"], ["😃", "smile happy"], ["😄", "laugh happy"], ["😁", "grin"],
@@ -1038,8 +1047,6 @@ function setupEmoji() {
   document.addEventListener("click", () => { if (emojiOpen) toggleEmoji(false); });
   document.addEventListener("keydown", e => { if (e.key === "Escape" && emojiOpen) toggleEmoji(false); });
 }
-
-/* ============ WEBHOOK SENDER ============ */
 
 function setWebhookStatus(msg, kind) {
   const el = document.getElementById("whStatus");
@@ -1148,11 +1155,11 @@ function setupWebhook() {
   }));
 }
 
-/* ============ INIT ============ */
-
 buildToolbar();
 buildQuickList();
 setupTabs();
+setupNav();
+setupToolbarScroll();
 setupTimestamps();
 buildCheatsheet();
 setupEmbed();
