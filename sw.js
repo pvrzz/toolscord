@@ -5,8 +5,8 @@ by: github.com/pvrzz
 ===========================
 */
 
-const CACHE = "toolscord-v1";
-const RUNTIME = "toolscord-runtime-v1";
+const CACHE = "toolscord-v2";
+const RUNTIME = "toolscord-runtime-v2";
 const CORE = [
   "./",
   "./index.html",
@@ -38,6 +38,21 @@ self.addEventListener("fetch", (e) => {
 
   const url = new URL(req.url);
   if (url.hostname.endsWith("discord.com") || url.hostname.endsWith("discordapp.com")) return;
+
+  const isHTML = req.mode === "navigate" || (req.headers.get("accept") || "").includes("text/html");
+
+  if (isHTML) {
+    e.respondWith(
+      fetch(req)
+        .then((res) => {
+          const copy = res.clone();
+          caches.open(CACHE).then((c) => c.put("./index.html", copy)).catch(() => {});
+          return res;
+        })
+        .catch(() => caches.match(req).then((r) => r || caches.match("./index.html")))
+    );
+    return;
+  }
 
   e.respondWith(
     caches.match(req).then((cached) => {
